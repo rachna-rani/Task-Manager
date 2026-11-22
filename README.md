@@ -1,4 +1,4 @@
-# JS Playground — Task Manager
+#Task Manager
 
 A fully working **Task Manager** web app built to demonstrate all **27 core JavaScript concepts** in one project.
 
