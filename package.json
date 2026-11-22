@@ -1,0 +1,8 @@
+{
+  "name": "js-playground",
+  "version": "1.0.0",
+  "description": "Task Manager demonstrating 27 JavaScript concepts",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}

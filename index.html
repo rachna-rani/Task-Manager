@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS Playground — Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>JS Playground</h1>
+    <p>A Task Manager built to demonstrate 27 JavaScript concepts</p>
+  </header>
+
+  <main>
+
+    <section class="add-task">
+      <h2>Add Task</h2>
+      <form id="taskForm">
+        <input type="text" id="taskTitle" placeholder="What needs to be done?" required />
+        <select id="taskPriority">
+          <option value="low">Low Priority</option>
+          <option value="medium" selected>Medium Priority</option>
+          <option value="high">High Priority</option>
+        </select>
+        <select id="taskCategory">
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+          <option value="learning">Learning</option>
+        </select>
+        <button type="submit">+ Add Task</button>
+      </form>
+    </section>
+
+    <section class="stats" id="stats"></section>
+
+    <section class="filters">
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="active">Active</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+      </div>
+      <div class="filter-row">
+        <button class="cat-btn active" data-category="all">All Categories</button>
+        <button class="cat-btn" data-category="work">Work</button>
+        <button class="cat-btn" data-category="personal">Personal</button>
+        <button class="cat-btn" data-category="learning">Learning</button>
+      </div>
+    </section>
+
+    <section class="task-list" id="taskList">
+      <p class="loading" id="loadingMsg">Loading tasks...</p>
+    </section>
+
+    <section class="actions">
+      <button id="clearCompleted" class="btn-secondary">Clear Completed</button>
+      <button id="clearAll" class="btn-danger">Clear All</button>
+      <button id="showStats" class="btn-secondary">Log Stats to Console</button>
+    </section>
+
+  </main>
+
+  <!-- type="module" enables ES Module imports (Topic 25) -->
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d2e;
+  --border: #2d3148;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --danger: #ef4444;
+  --low: #22c55e;
+  --medium: #f59e0b;
+  --high: #ef4444;
+  --radius: 10px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+
+header h1 { font-size: 1.75rem; color: var(--accent); letter-spacing: -0.5px; }
+header p  { color: var(--muted); font-size: 0.875rem; margin-top: 0.25rem; }
+
+main { max-width: 760px; margin: 2rem auto; padding: 0 1rem; display: grid; gap: 1.25rem; }
+
+/* ── Add Task ── */
+.add-task { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+.add-task h2 { font-size: 1rem; color: var(--muted); margin-bottom: 0.75rem; }
+
+form { display: grid; grid-template-columns: 1fr auto auto auto; gap: 0.5rem; }
+input, select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  outline: none;
+}
+input:focus, select:focus { border-color: var(--accent); }
+
+button {
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  transition: background 0.15s;
+}
+button:hover { background: var(--accent-hover); }
+
+/* ── Stats ── */
+.stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.25rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* ── Filters ── */
+.filters { display: grid; gap: 0.5rem; }
+.filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.filter-btn, .cat-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.9rem;
+  transition: all 0.15s;
+}
+.filter-btn:hover, .cat-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--surface); }
+.filter-btn.active, .cat-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+/* ── Task List ── */
+.task-list { display: grid; gap: 0.6rem; }
+
+.loading, .empty { color: var(--muted); text-align: center; padding: 2rem; font-size: 0.9rem; }
+
+.task-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  transition: opacity 0.2s;
+}
+.task-card.priority-low    { border-left-color: var(--low); }
+.task-card.priority-medium { border-left-color: var(--medium); }
+.task-card.priority-high   { border-left-color: var(--high); }
+.task-card.completed       { opacity: 0.5; }
+
+.task-info { flex: 1; min-width: 0; }
+
+.task-category {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  background: var(--bg);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.task-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* allow title to wrap on small screens */
+@media (max-width: 600px) {
+  .task-title {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+}
+.task-card.completed .task-title { text-decoration: line-through; }
+
+.task-meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+.task-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+.btn-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding: 0.3rem 0.7rem;
+}
+.btn-toggle:hover { border-color: var(--low); color: var(--low); background: transparent; }
+
+.btn-delete {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+}
+.btn-delete:hover { border-color: var(--danger); color: var(--danger); background: transparent; }
+
+/* ── Actions ── */
+.actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.btn-secondary { background: var(--surface); border: 1px solid var(--border); color: var(--muted); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); background: var(--surface); }
+
+.btn-danger { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.btn-danger:hover { background: var(--danger); border-color: var(--danger); color: white; }
+
+/* ═══════════════════════════════════════
+   MOBILE — screens 600px and below
+═══════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* Header: smaller title on mobile */
+  header { padding: 1rem; }
+  header h1 { font-size: 1.3rem; }
+
+  /* Main: less side padding */
+  main { margin: 1rem auto; padding: 0 0.75rem; gap: 0.9rem; }
+
+  /* Form: all 4 fields stack into one column */
+  form { grid-template-columns: 1fr; }
+
+  /* Input + Select: full width, taller for easier tapping */
+  input, select {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    font-size: 1rem;        /* stops iOS zoom on focus */
+  }
+
+  /* Add Task button: full width, tall touch target */
+  form button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+
+  /* Filter buttons: bigger tap area */
+  .filter-btn, .cat-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.82rem;
+    min-height: 36px;
+  }
+
+  /* Task card: stack info on top, buttons on bottom */
+  .task-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 0.9rem;
+  }
+
+  /* Task info: take full width */
+  .task-info { width: 100%; }
+
+  /* Task actions: move to bottom, stretch full width */
+  .task-actions {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  /* Done + Delete buttons: taller for finger tap */
+  .btn-toggle, .btn-delete {
+    padding: 0.5rem 1rem;
+    font-size: 0.82rem;
+    min-height: 38px;
+  }
+
+  /* Action buttons at bottom: stack vertically, full width */
+  .actions { flex-direction: column; }
+  .actions button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
